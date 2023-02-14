@@ -3,10 +3,10 @@ let persona1 = {
     id: 1,
     nombre: 'Rick',
     apellido: 'Grimes',
-    teléfono: '+1 269 566 45',
+    telefono: '+1 269 566 45',
     ubicacion: {
         ciudad: 'Atlanta',
-        dirección: 'zombie Avenue'
+        direccion: 'zombie Avenue'
     }
 }
 
@@ -14,10 +14,10 @@ let persona2 = {
     id: 2,
     nombre: 'Ragnar',
     apellido: 'Lothbrok',
-    teléfono: '+562 269 566 45',
+    telefono: '+562 269 566 45',
     ubicacion: {
         ciudad: 'Kategat',
-        dirección: 'Montes de odin'
+        direccion: 'Montes de odin'
     }
 }
 
@@ -27,15 +27,17 @@ let agenda = [persona1, persona2];
 
 //Declaramos una funcion para agregar nuevos contactos que recibiran como propiedades los datos necesarios de nuestro contacto a agregar
 
-function nuevoContacto(id, nombre, apellido, teléfono, ciudad, dirección){
+function nuevoContacto(id, nombre, apellido, telefono, ciudad, direccion){
     //dentro de la funcion, como objeto declaramos nuestra variable (persona) que sera igual a un objeto con los datos requeridos para posterior mente convertirse en parametro del ".pus" para que la funcion cumpla su objetivo (si nuesta variable se llamara agua, el parametro que reciba ".push" debera ser agua: .push(agua))
     let persona = {
         id,
         nombre, 
         apellido,
-        teléfono,
-        ciudad,
-        dirección
+        telefono,
+        ubicacion: {
+            ciudad,
+            direccion
+        }
     }
     agenda.push(persona)
 }
@@ -45,13 +47,6 @@ function nuevoContacto(id, nombre, apellido, teléfono, ciudad, dirección){
 nuevoContacto(3,'Son', 'Goku', '+89 555', 'Japon', 'Montaña paoz')
 
 // y al hacer console.log nos damos cuenta que nuestro contacto ha sido agregado satisfactoriamente
-
-console.log(agenda)
-
-function borrarContacto(contacto){
-    let nuevaAgenda = agenda.filter((persona) => contacto !== persona )
-    agenda = nuevaAgenda;
-}
 
 //Para eliminar contactos declaramos una funcion que lleve por nombre nuestra accion, y esta recibira por parametro el id del contacto que queremos borrar, seguido de esto con un "for" indicamos con una condicional lo siguiente: Si en mi agenda el indice del id de mi contacto es igual al id que recibe por parametro, entonces con la funcion .splice borrame dicho indice.
 
@@ -68,24 +63,25 @@ function actualizarContacto(id, nuevoNombre, nuevoApellido, nuevoTelefono, nueva
        if(agenda[i].id === id){
         agenda[i] = {
             id,
-            nuevoNombre,
-            nuevoApellido,
-            nuevoTelefono,
-            nuevaCiudad,
-            nuevaDireccion   
+            nombre: nuevoNombre,
+            apellido: nuevoApellido,
+            telefono: nuevoTelefono,
+            ubicacion: {
+                ciudad: nuevaCiudad,
+                direccion: nuevaDireccion
+            }   
         }
        }
     }
 }
 
 function mostrarAgenda(){
-    agenda.sort();
    for (const contacto of agenda) {
     console.log(contacto)
    }
 }  
-
-actualizarContacto(2, 'Bob esponja', 'Pantalones Cuadrados', '7895631', 'Fondo de vikini', 'Una piña debajo del mar')
-mostrarAgenda()
-
-
+// console.log(agenda)
+// actualizarContacto(2, 'Bob esponja', 'Pantalones Cuadrados', '7895631', 'Fondo de vikini', 'Una piña debajo del mar')
+// console.log(agenda)
+// eliminarContacto()
+// mostrarAgenda()
